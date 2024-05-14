@@ -2,15 +2,16 @@
 
 def solution(targets):
     
-    targets.sort()
-    i = 0
-    while i + 1 < len(targets):
-        if targets[i][1] > targets[i + 1][0]:
-            del targets[i + 1]
-        else:
-            i += 1
+    sorted_targets = sorted(targets, key = lambda x : x[1])
+    answer = 0
+    number = 0
+    
+    for i in range(len(targets)):
+        if number <= sorted_targets[i][0]:
+            answer += 1
+            number = sorted_targets[i][1]
 
-    return len(targets)
+    return answer
 
 result = solution([[4,5],[4,8],[10,14],[11,13],[5,12],[3,7],[1,4]])
 print(result)
