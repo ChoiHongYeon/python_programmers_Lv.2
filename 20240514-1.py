@@ -5,13 +5,6 @@ def solution(targets):
     targets.sort()
     i = 0
     while i + 1 < len(targets):
-        if targets[i][0] == targets[i + 1][0]:
-            del targets[i + 1]
-        else:
-            i += 1
-
-    i = 0
-    while i + 1 < len(targets):
         if targets[i][1] > targets[i + 1][0]:
             del targets[i + 1]
         else:
