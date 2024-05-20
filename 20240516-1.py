@@ -15,20 +15,21 @@ def solution(a, b):
     for x in range(1, int(math.sqrt((b ** 2) / 2)) + 1):
         min_y = 0
         max_y = 0
-        for y in range(x + 1, b):
-            if x != y and (x ** 2) + (y ** 2) >= a2 and (x ** 2) + (y ** 2) <= b2:
-                min_y = y
-                break
-        for y in range(b - 1, x, -1):
-            if x != y and (x ** 2) + (y ** 2) >= a2 and (x ** 2) + (y ** 2) <= b2:
-                max_y = y
-                break
-        if min_y != 0 and max_y != 0:
+        if x < a:
+            min_y = math.ceil(math.sqrt((a ** 2) - (x ** 2)))
+            if min_y <= x:
+                min_y = x + 1
+            max_y = int(math.sqrt((b ** 2) - (x ** 2)))
+        else:
+            if x + 1 <= math.sqrt((b ** 2) - (x ** 2)):
+                min_y = x + 1
+            max_y = int(math.sqrt((b ** 2) - (x ** 2)))
+        if min_y != 0 and max_y >= min_y:
             o += (max_y - min_y + 1)
     o *= 8 # 그 외의 경우
     
     answer = z + s + o
     return answer
 
-result = solution(2,4)
+result = solution(2,3)
 print(result)
