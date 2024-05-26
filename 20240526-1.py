@@ -1,20 +1,23 @@
 # 연속된 부분 수열의 합 (https://school.programmers.co.kr/learn/courses/30/lessons/178870?language=python3)
 
 def solution(sequence, k):
+    
+    s = [sequence[len(sequence) - 1]]
+    s_max, s_min = len(sequence) - 1, len(sequence) - 1
+    
+    while sum(s) != k:
+        if sum(s) > k:
+            s.pop()
+            s_max -= 1
+        else:
+            s_min -= 1
+            s.insert(0, sequence[s_min])
 
-    for i in range(len(sequence) - 1, -1, -1):
-        j = i
-        s = 0
-        while j >= 0 and s < k:
-            s += sequence[j]
-            j -= 1
-        if s == k:
-            break
-
-    if sequence[j + 1] == sequence[i]:
-        return [sequence.index(sequence[i]), sequence.index(sequence[i]) + i - j - 1]
+    if max(s) == min(s):
+        return [sequence.index(s[0]), sequence.index(s[0]) + s_max - s_min]
     else:
-        return [j + 1, i]
+        return [s_min, s_max]
+
 
 
 result1 = solution([1, 2, 3, 4, 5], 7)
