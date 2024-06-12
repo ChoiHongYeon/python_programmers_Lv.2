@@ -20,9 +20,9 @@ def solution(board):
             if OX[i] * 3 == B[0][j] + B[1][j] + B[2][j]:
                 OX_bingo[i] += 1
         if OX[i] * 3 == B[0][0] + B[1][1] + B[2][2]:
-            OX_bingo += 1
+            OX_bingo[i] += 1
         if OX[i] * 3 == B[0][2] + B[1][1] + B[2][0]:
-            OX_bingo += 1
+            OX_bingo[i] += 1
 
     answer = 0
     if B_count == 0 or B_count == 2 or B_count == 4:
@@ -34,11 +34,8 @@ def solution(board):
     elif B_count == 6 or B_count == 8:
         if O_count == X_count and OX_bingo[0] == 0:
             answer = 1
-    elif B_count == 7:
+    elif B_count == 7 or B_count == 9:
         if O_count == X_count + 1 and OX_bingo[1] == 0:
-            answer = 1
-    else:
-        if O_count == X_count + 1 and OX_bingo[0] < 2 and OX_bingo[1] == 0:
             answer = 1
 
     return answer
