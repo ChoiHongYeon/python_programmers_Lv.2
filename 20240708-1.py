@@ -1,30 +1,26 @@
 # 숫자 변환하기 (https://school.programmers.co.kr/learn/courses/30/lessons/154538)
 
+from collections import deque
+
 def solution(x, y, n):
 
-    answer = 0
+    if x == y:
+        return 0
+    
+    q = deque([[x, 0]])
+    visited = set([x])
 
-    while y > x:
+    while q:
+        number, steps = q.popleft()
 
-        add_n = y
-        mul_2 = y
-        mul_3 = y
+        for i in [number + n, number * 2, number * 3]:
+            if i == y:
+                return steps + 1
+            if i < y and i not in visited:
+                q.append([i, steps + 1])
+                visited.add(i)
 
-        if y - n >= x:
-            add_n = y - n
-        if y % 2 == 0 and y // 2 >= x:
-            mul_2 = y // 2
-        if y % 3 == 0 and y // 3 >= x:
-            mul_3 = y // 3
-
-        next_y = min(add_n, mul_2, mul_3)
-        if next_y == y:
-            answer = -1
-            break
-        y = next_y
-        answer += 1
-
-    return answer
+    return -1
 
 result1 = solution(10, 40, 5)
 result2 = solution(10, 40, 30)
