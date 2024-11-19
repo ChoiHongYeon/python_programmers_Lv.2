@@ -12,6 +12,7 @@ def solution(progresses, speeds):
         while progresses:
             if progresses[0] >= 100:
                 del(progresses[0])
+                del(speeds[0])
                 answer[a] += 1
             else:
                 break
